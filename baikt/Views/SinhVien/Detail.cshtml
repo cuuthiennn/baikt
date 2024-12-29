@@ -1,0 +1,73 @@
+@model baikt.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Chi tiết sinh viên";
+}
+
+<style>
+    body {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .container {
+        background-color: #444;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        color: #fff;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        background-color: #555;
+        color: #fff;
+        border-color: #777;
+    }
+
+    .form-control:focus {
+        border-color: #3498db;
+        background-color: #444;
+        color: #fff;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        border-color: #2980b9;
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        border-color: #c0392b;
+    }
+
+    .highlight {
+        font-weight: bold;
+        color: #f39c12;
+    }
+</style>
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+
+    <div>
+        <strong>Mã sinh viên:</strong> @Model.MaSV <br />
+        <strong>Họ tên:</strong> @Model.HoTen <br />
+        <strong>Ngày sinh:</strong> @Model.NgaySinh.ToString("dd/MM/yyyy") <br />
+        <strong>Giới tính:</strong> @Model.GioiTinh <br />
+        <strong>Ngành:</strong> @Model.MaNganh <br />
+        <strong>Hình:</strong> @Model.Hinh <br />
+        <img src="@Model.Hinh" alt="Student Image" style="width:100px; height:auto;" />
+    </div>
+
+    <a href="@Url.Action("Index", "SinhVien")" class="btn btn-primary">Quay lại</a>
+</div>

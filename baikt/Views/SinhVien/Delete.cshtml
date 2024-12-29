@@ -1,0 +1,79 @@
+@model baikt.Models.SinhVien
+
+@{
+ViewData["Title"] = "Xóa sinh viên";
+}
+
+<style>
+    body {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .container {
+        background-color: #444;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    h1, h3 {
+        color: #fff;
+    }
+
+    .form-group {
+        color: #fff;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        border-color: #c0392b;
+    }
+
+    .btn-secondary {
+        background-color: #95a5a6;
+        border-color: #7f8c8d;
+    }
+
+    .img-thumbnail {
+        border-radius: 5px;
+        max-width: 150px;
+        margin-top: 10px;
+    }
+
+    .highlight {
+        font-weight: bold;
+        color: #f39c12;
+    }
+</style>
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+
+    <h3 class="text-warning">Bạn có chắc chắn muốn xóa sinh viên này không?</h3>
+
+    <div>
+        <strong class="highlight">Mã sinh viên:</strong> @Model.MaSV <br />
+        <strong class="highlight">Họ tên:</strong> @Model.HoTen <br />
+        <strong class="highlight">Ngày sinh:</strong> @Model.NgaySinh.ToString("dd/MM/yyyy") <br />
+        <strong class="highlight">Giới tính:</strong> @Model.GioiTinh <br />
+        <strong class="highlight">Ngành:</strong> @Model.MaNganh <br />
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.Hinh))
+    {
+    <div>
+        <strong class="highlight">Hình ảnh:</strong><br />
+        <img src="@Model.Hinh" alt="Student Image" class="img-thumbnail" />
+    </div>
+    }
+
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" name="id" value="@Model.MaSV" />
+        <button type="submit" class="btn btn-danger">Xóa</button>
+        <a href="@Url.Action("Index", "SinhVien")" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>

@@ -1,0 +1,66 @@
+@model baikt.ViewModels.DangKyInfoViewModel
+
+@{
+    ViewData["Title"] = "Xác Nhận Đăng Ký Học Phần";
+    var hocPhans = Model.THocPhans;
+    var sinhVien = Model.SinhVien;
+}
+
+<h1>Xác Nhận Đăng Ký Học Phần</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Thông tin Đăng ký</h2>
+            @if (hocPhans.Any())
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Mã HP</th>
+                            <th>Tên học phần</th>
+                            <th>Số tín chỉ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var hp in hocPhans)
+                        {
+                            <tr>
+                                <td>@hp.MaHP</td>
+                                <td>@hp.TenHP</td>
+                                <td>@hp.SoTinChi</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <p>Số lượng học phần: @hocPhans.Count</p>
+                <p>Tổng số tín chỉ: @hocPhans.Sum(hp => hp.SoTinChi)</p>
+            }
+            else
+            {
+                <p>Không có học phần nào được đăng ký.</p>
+            }
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h2>Thông tin Sinh viên</h2>
+                @if (sinhVien != null)
+                {
+                    <p>Mã số sinh viên: @sinhVien.MaSV</p>
+                    <p>Họ tên: @sinhVien.HoTen</p>
+                    <p>Ngày sinh: @sinhVien.NgaySinh.ToString("dd/MM/yyyy")</p>
+                    <p>Ngành Học: @sinhVien.MaNganh</p>
+                    <p>Ngày Đăng Kí: @DateTime.Now.ToString("dd/MM/yyyy")</p>
+                }
+                else
+                {
+                    <p>Không tìm thấy thông tin sinh viên.</p>
+                }
+                <form asp-action="DoXacNhanDangKy" method="post">
+                    <button type="submit" class="btn btn-success btn-block">Xác Nhận</button>
+                </form>
+            </div>
+            <a asp-action="Index" class="btn btn-primary btn-block">Trở về giỏ hàng</a>
+        </div>
+    </div>
+</div>

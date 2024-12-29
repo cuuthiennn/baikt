@@ -1,0 +1,72 @@
+@model IEnumerable<baikt.Models.HocPhan>
+
+@{
+ViewData["Title"] = "Danh Sách Học Phần";
+}
+
+<h1>DANH SÁCH HỌC PHẦN</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Mã Học Phần</th>
+        <th>Tên Học Phần</th>
+        <th>Số Tín Chỉ</th>
+        <th>Số Lượng</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var hocPhan in Model)
+    {
+    <tr>
+        <td>@hocPhan.MaHP</td>
+        <td>@hocPhan.TenHP</td>
+        <td>@hocPhan.SoTinChi</td>
+        <td>@hocPhan.SoLuong</td>
+        <td>
+            <button class="register-button" data-mahp="@hocPhan.MaHP">Đăng Kí</button>
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    .register-button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    const registerButtons = document.querySelectorAll('.register-button');
+
+    registerButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const maHP = button.dataset.mahp;
+            fetch('/HocPhan/DangKy', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(maHP)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    if (data.success) location.reload();
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
+</script>

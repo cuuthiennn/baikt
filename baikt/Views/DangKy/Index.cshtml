@@ -1,0 +1,78 @@
+@model IEnumerable<HocPhan>
+
+@{
+ViewData["Title"] = "Đăng Kí Học Phần";
+int tongSoTinChi = 0;
+}
+
+<h1>Đăng Kí Học Phần</h1>
+
+@if (Model.Any())
+{
+<table>
+    <thead>
+    <tr>
+        <th>Mã HP</th>
+        <th>Tên Học Phần</th>
+        <th>Số Tín Chỉ</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var ctdk in Model)
+    {
+    tongSoTinChi += ctdk.SoTinChi;
+    <tr>
+        <td>@ctdk.MaHP</td>
+        <td>@ctdk.TenHP</td>
+        <td>@ctdk.SoTinChi</td>
+        <td>
+            <form asp-action="XoaDangKy" method="post">
+                <input type="hidden" name="maHP" value="@ctdk.MaHP" />
+                <button type="submit" class="btn btn-danger">Xóa</button>
+            </form>
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>
+<p>Số tín chỉ: @Model.Count()</p>
+<p>Tổng số tín chỉ: @tongSoTinChi</p>
+<form asp-action="XoaTatCaDangKy" method="post">
+    <button type="submit" class="btn btn-danger">Xóa tất cả</button>
+</form>
+<form asp-action="XacNhanDangKy">
+    <button type="submit" class="btn btn-success">Lưu đăng ký</button>
+</form>
+}
+else
+{
+<p>Bạn chưa đăng ký học phần nào.</p>
+}
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>

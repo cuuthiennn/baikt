@@ -1,0 +1,109 @@
+@model baikt.Models.SinhVien
+
+@{
+ViewData["Title"] = "Thêm Sinh Viên";
+}
+
+<style>
+    body {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .container {
+        background-color: #444;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    h2 {
+        color: #fff;
+    }
+
+    .form-group label {
+        color: #fff;
+    }
+
+    .form-control {
+        background-color: #555;
+        color: #fff;
+        border-color: #777;
+    }
+
+    .form-control:focus {
+        border-color: #3498db;
+        background-color: #444;
+        color: #fff;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        border-color: #2980b9;
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        border-color: #c0392b;
+    }
+
+    .text-danger {
+        color: #f39c12;
+    }
+
+    .highlight {
+        font-weight: bold;
+        color: #f39c12;
+    }
+</style>
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+    <form asp-controller="SinhVien" asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="MaSV" class="control-label"></label>
+            <input asp-for="MaSV" class="form-control" />
+            <span asp-validation-for="MaSV" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="HoTen" class="control-label"></label>
+            <input asp-for="HoTen" class="form-control" />
+            <span asp-validation-for="HoTen" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="GioiTinh" class="control-label"></label>
+            <input asp-for="GioiTinh" class="form-control" />
+            <span asp-validation-for="GioiTinh" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="NgaySinh" class="control-label"></label>
+            <input asp-for="NgaySinh" class="form-control" type="date" />
+            <span asp-validation-for="NgaySinh" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Hinh" class="control-label"></label>
+            <input type="file" class="form-control" name="Hinh" accept="image/*" />
+            <span asp-validation-for="Hinh" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MaNganh" class="control-label"></label>
+            <input asp-for="MaNganh" class="form-control" />
+            <span asp-validation-for="MaNganh" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+
+    <div>
+        <a href="@Url.Action("Index", "SinhVien")" class="btn btn-danger">Hủy</a>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+@model baikt.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Sửa thông tin sinh viên";
+}
+
+<style>
+    body {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .container {
+        background-color: #444;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        color: #fff;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        background-color: #555;
+        color: #fff;
+        border-color: #777;
+    }
+
+    .form-control:focus {
+        border-color: #3498db;
+        background-color: #444;
+        color: #fff;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #218838;
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        border-color: #c0392b;
+    }
+
+    .highlight {
+        font-weight: bold;
+        color: #f39c12;
+    }
+</style>
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="MaSV">Mã sinh viên</label>
+            <input type="text" class="form-control" id="MaSV" name="MaSV" value="@Model.MaSV" readonly />
+        </div>
+        
+        <div class="form-group">
+            <label for="HoTen">Họ tên</label>
+            <input type="text" class="form-control" id="HoTen" name="HoTen" value="@Model.HoTen" required />
+        </div>
+        
+        <div class="form-group">
+            <label for="NgaySinh">Ngày sinh</label>
+            <input type="date" class="form-control" id="NgaySinh" name="NgaySinh" value="@Model.NgaySinh.ToString("yyyy-MM-dd")" required />
+        </div>
+        
+        <div class="form-group">
+            <label for="GioiTinh">Giới tính</label>
+            <input type="text" class="form-control" id="GioiTinh" name="GioiTinh" value="@Model.GioiTinh" required />
+        </div>
+
+        <div class="form-group">
+            <label for="MaNganh">Ngành</label>
+            <input type="text" class="form-control" id="MaNganh" name="MaNganh" value="@Model.MaNganh" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Hinh">Hình ảnh</label>
+            <input type="file" class="form-control" name="Hinh" accept="image/*" />
+            <span asp-validation-for="Hinh" class="text-danger"></span>
+
+            @if (!string.IsNullOrEmpty(Model.Hinh))
+            {
+                <div>
+                    <img src="@Model.Hinh" alt="Student Image" style="width:100px; height:auto;" />
+                </div>
+            }
+        </div>
+
+        <button type="submit" class="btn btn-success">Cập nhật</button>
+        <a href="@Url.Action("Index", "SinhVien")" class="btn btn-danger">Hủy</a>
+    </form>
+</div>

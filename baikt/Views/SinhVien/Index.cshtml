@@ -1,0 +1,105 @@
+﻿@model IEnumerable<baikt.Models.SinhVien>
+
+@{
+    ViewData["Title"] = "Trang Sinh Viên";
+}
+
+<style>
+    body {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .container {
+        background-color: #444;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        color: #fff;
+    }
+
+    .table {
+        background-color: #555;
+        color: #fff;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .table th, .table td {
+        color: #fff;
+        padding: 10px;
+    }
+
+    .table img {
+        border-radius: 5px;
+        max-width: 100px;
+        height: auto;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        border-color: #2980b9;
+    }
+
+    .btn-secondary {
+        background-color: #95a5a6;
+        border-color: #7f8c8d;
+    }
+
+    .highlight {
+        font-weight: bold;
+        color: #f39c12;
+    }
+</style>
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <a asp-action="Create" class="btn btn-primary">Thêm Sinh Viên</a>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>MaSV</th>
+                <th>Họ tên</th>
+                <th>Giới tính</th>
+                <th>Ngày sinh</th>
+                <th>Hình ảnh</th>
+                <th>Ngành</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaSV</td>
+                    <td>@item.HoTen</td>
+                    <td>@item.GioiTinh</td>
+                    <td>@item.NgaySinh.ToString("MM/dd/yyyy")</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.Hinh))
+                        {
+                            <img src="@item.Hinh" alt="Student Image" class="img-thumbnail" />
+                        }
+                        else
+                        {
+                            <img src="/images/default.jpg" alt="Default Image" class="img-thumbnail" />
+                        }
+                    </td>
+                    <td>@item.MaNganh</td>
+                    <td>
+                        <a href="@Url.Action("Detail", "SinhVien", new { id = item.MaSV })" class="btn btn-info btn-sm">Chi tiết</a> |
+                        <a href="@Url.Action("Edit", "SinhVien", new { id = item.MaSV })" class="btn btn-warning btn-sm">Sửa</a> |
+                        <a href="@Url.Action("Delete", "SinhVien", new { id = item.MaSV })" class="btn btn-danger btn-sm">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

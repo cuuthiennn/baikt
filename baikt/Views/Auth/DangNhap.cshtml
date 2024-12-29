@@ -1,0 +1,22 @@
+@model baikt.Models.LoginViewModel
+
+@{
+ViewData["Title"] = "Đăng Nhập";
+}
+
+<h2>ĐĂNG NHẬP</h2>
+
+<form asp-controller="Auth" asp-action="DangNhap" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div>
+        <label asp-for="MaSV"></label>
+        <input asp-for="MaSV" />
+        <span asp-validation-for="MaSV"></span>
+    </div>
+
+    <button type="submit">Đăng Nhập</button>
+</form>
+
+<a asp-controller="SinhVien" asp-action="Index">Back to List</a>
+
